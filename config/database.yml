@@ -21,4 +21,8 @@ production:
   username: <%= ENV["TODO_DATABASE_USER"] %>
   password: <%= ENV["TODO_DATABASE_PASSWORD"] %>
   host: <%= ENV["DB_HOST"] %>
-  port: <%= ENV["DB_PORT"] %>
+  port: <%= ENV["DB_PORT"] || 5432%>
+
+cable:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
