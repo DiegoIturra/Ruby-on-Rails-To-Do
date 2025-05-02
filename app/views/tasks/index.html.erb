@@ -1,0 +1,71 @@
+<h1>Tasks</h1>
+
+<%= link_to 'New Task', new_task_path %>
+<%= link_to 'Sort by Length', tasks_path(order: "length") %>
+<%= link_to 'Restore Order', tasks_path %>
+
+<div id="tasks" class="main-container">
+  
+  <div class="task-column">
+    <h2>No completadas</h2>
+    <% @tasks.select { |task| !task.done }.each do |task| %>
+      <div class="task-card">
+        <h1><%= task.name %></h1>
+        <div class="options-container">
+          <%= button_to "Delete", task, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+          <%= link_to "Edit", edit_task_path(task) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="task-column">
+    <h2>Completadas</h2>
+    <% @tasks.select { |task| task.done }.each do |task| %>
+      <div class="task-card">
+        <h1><%= task.name %></h1>
+        <div class="options-container">
+          <%= button_to "Delete", task, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+          <%= link_to "Edit", edit_task_path(task) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+
+<style type="text/css">
+
+.main-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.task-column {
+  width: 45%;
+}
+
+.task-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.options-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 20px;
+}
+
+  
+</style>
