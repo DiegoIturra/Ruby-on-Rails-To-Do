@@ -22,3 +22,7 @@ production:
   password: <%= ENV["TODO_DATABASE_PASSWORD"] %>
   host: <%= ENV["DB_HOST"] %>
   port: <%= ENV["DB_PORT"] || 5432%>
+
+queue:
+  <<: *default
+  database: <%= ENV["DATABASE_URL"] %>
